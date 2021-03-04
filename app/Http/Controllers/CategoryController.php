@@ -37,10 +37,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required'
+        ]);
+
         Category::create([
             'name' => $request->get('name')
         ]);
-        return redirect()->back()->with('message', 'Category Created');
+        return redirect()->route('category.index')->with('message', 'Category Created');
     }
 
     /**
