@@ -29,7 +29,7 @@
                                     <th scope="row">{{ $key+1 }}</th>
                                     <td>{{ $category->name }}</td>
                                     <td>
-                                        <a href="{{ route('category.edit', [$category->id]) }}" class="btn btn-outline-success">TEST</a>
+                                        <a href="{{ route('category.edit', [$category->id]) }}" class="btn btn-outline-success">Edit</a>
                                     </td>
                                     <td>
                                             
