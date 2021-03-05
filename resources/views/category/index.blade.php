@@ -10,7 +10,14 @@
                 </div>
             @endif
             <div class="card">
-                <div class="card-header">All Categories</div>
+                <div class="card-header">All Categories
+                    <span class="float-right">
+                        <a href="{{ route('category.create') }}">
+                            <button class="btn btn-outline-secondary">
+                                Add Category
+                            </button>
+                    </span>
+                </div>
 
                 <div class="card-body">
                 <table class="table">
