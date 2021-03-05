@@ -10,44 +10,53 @@
                 </div>
             @endif
             <div class="card">
-                <div class="card-header">All Categories
+                <div class="card-header">All Foods
                     <span class="float-right">
-                        <a href="{{ route('category.create') }}">
+                        <a href="{{ route('food.create') }}">
                             <button class="btn btn-outline-secondary">
-                                Add Category
+                                Add Food
                             </button>
                     </span>
                 </div>
 
                 <div class="card-body">
+                    
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">Image</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Category</th>
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if(count($categories) > 0)
-                            @foreach($categories as $key=>$category)
+                        @if(count($foods) > 0)
+                            @foreach($foods as $key=>$food)
                                 <tr>
-                                    <th scope="row">{{ $key+1 }}</th>
-                                    <td>{{ $category->name }}</td>
                                     <td>
-                                        <a href="{{ route('category.edit', [$category->id]) }}" class="btn btn-outline-success">Edit</a>
+                                        <img src="{{ asset('images')}}/{{$food->image}}" width="100">
+                                    </td>
+                                    <td>{{ $food->name }}</td>
+                                    <td>{{ $food->description }}</td>
+                                    <td>£{{ $food->price }}</td>
+                                    <td>{{ $food->category->name }}</td>
+                                    <td>
+                                        <a href="{{ route('food.edit', [$food->id]) }}" class="btn btn-outline-success">Edit</a>
                                     </td>
                                     <td>
                                             
-                                    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal{{$category->id}}">
+                                    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal{{$food->id}}">
                                     Delete
                                     </button>
 
                                         <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal{{$category->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModal{{$food->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
-                                                <form action="{{ route('category.destroy', [$category->id]) }}" method="post">@csrf
+                                                <form action="{{ route('food.destroy', [$food->id]) }}" method="post">@csrf
                                                 {{ method_field('DELETE')}}
                                                 <div class="modal-content">
                                                 <div class="modal-header">
@@ -57,7 +66,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Are you sure you'd like to delete the {{$category->name}} category?
+                                                    Are you sure you'd like to delete {{$food->name}}?
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -72,11 +81,12 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="4">No Categories to Display!</td>
+                                <td colspan="4">No Food to Display!</td>
                             </tr>
                         @endif
                     </tbody>
                     </table>
+                    <div>{{ $foods->links() }}</div>
                 </div>
             </div>
 
