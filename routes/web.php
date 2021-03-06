@@ -15,13 +15,10 @@ use App\Http\Controllers\FoodController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('/', [FoodController::class, 'listFood']);
+Route::get('/foods/{id}', [FoodController::class, 'view'])->name('food.view');
 Route::resource('category', CategoryController::class)->middleware('auth');
 Route::resource('food', FoodController::class)->middleware('auth');
