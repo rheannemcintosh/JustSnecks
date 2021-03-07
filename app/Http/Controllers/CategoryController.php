@@ -1,9 +1,19 @@
 <?php
 
+/**
+ * Category Controller
+ *
+ * Handles the logic behind the Category Model
+ *
+ * @author  Rheanne McIntosh <rheanne.mcintosh@outlook.com>
+ * @version 07-03-2021
+ */
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// Use Statements
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -44,18 +54,8 @@ class CategoryController extends Controller
         Category::create([
             'name' => $request->get('name')
         ]);
-        return redirect()->route('category.index')->with('message', 'Category Created');
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return redirect()->route('category.index')->with('message', 'Category Created');
     }
 
     /**
@@ -67,6 +67,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::find($id);
+
         return view('category.edit', compact('category'));
     }
 
@@ -83,9 +84,9 @@ class CategoryController extends Controller
             'name' => 'required'
         ]);
         
-        $category = Category::find($id);
-
+        $category       = Category::find($id);
         $category->name = $request->get('name');
+
         $category->save();
         
         return redirect()->route('category.index')->with('message', 'Category Updated');
@@ -100,7 +101,9 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
+
         $category->delete();
+
         return redirect()->route('category.index')->with('message', 'Category Deleted');
     }
 }

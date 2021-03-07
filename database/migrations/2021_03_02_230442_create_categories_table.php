@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Create Categories Table
+ *
+ * @author  Rheanne McIntosh <rheanne.mcintosh@outlook.com>
+ * @version 07-03-2021
+ */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

@@ -1,10 +1,19 @@
 <?php
 
+/**
+ * Category Model
+ *
+ * @author  Rheanne McIntosh <rheanne.mcintosh@outlook.com>
+ * @version 07-03-2021
+ */
+
 namespace App\Models;
 
+// Use Statements
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Category;
+
 
 class Food extends Model
 {
@@ -23,6 +32,9 @@ class Food extends Model
         'image',
     ];
 
+    /**
+     * Get the food associated with the category
+     */
     public function category() {
         return $this->hasOne(Category::class, 'id', 'category_id');
     }
