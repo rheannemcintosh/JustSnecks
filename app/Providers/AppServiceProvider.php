@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * App Service Provider
+ *
+ * @author  Rheanne McIntosh <rheanne.mcintosh@outlook.com>
+ * @version 07-03-2021
+ */
+
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
