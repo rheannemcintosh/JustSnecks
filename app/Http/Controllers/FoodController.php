@@ -1,7 +1,17 @@
 <?php
 
+/**
+ * Food Controller
+ *
+ * Handles the logic behind the Food Model
+ *
+ * @author  Rheanne McIntosh <rheanne.mcintosh@outlook.com>
+ * @version 07-03-2021
+ */
+
 namespace App\Http\Controllers;
 
+// Use Statements
 use Illuminate\Http\Request;
 use App\Models\Food;
 use App\Models\Category;
@@ -16,6 +26,7 @@ class FoodController extends Controller
     public function index()
     {
         $foods = Food::latest()->simplePaginate(10);
+
         return view('food.index', compact('foods'));
     }
 
@@ -38,25 +49,25 @@ class FoodController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name'        => 'required',
             'description' => 'required',
-            'price' => 'required|integer',
-            'category' => 'required',
-            'image' => 'required|mimes:png,jpeg,jpg',
+            'price'       => 'required|integer',
+            'category'    => 'required',
+            'image'       => 'required|mimes:png,jpeg,jpg',
         ]);
 
         $image           = $request->file('image');
-        $name            = time().'_'.$image->getClientOriginalExtension();
+        $imageName       = time().'_'.$image->getClientOriginalExtension();
         $destinationPath = public_path('\images');
 
-        $image->move($destinationPath, $name);
+        $image->move($destinationPath, $imageName);
 
         Food::create([
-            'name' => $request->get('name'),
+            'name'        => $request->get('name'),
             'description' => $request->get('description'),
-            'price' => $request->get('price'),
+            'price'       => $request->get('price'),
             'category_id' => $request->get('category'),
-            'image' => $name,
+            'image'       => $imageName,
         ]);
 
         return redirect()->route('food.index')->with('message', 'Food Created');
@@ -70,7 +81,9 @@ class FoodController extends Controller
      */
     public function show($id)
     {
-        //
+        $food = Food::find($id);
+
+        return view('food.detail', compact('food'));
     }
 
     /**
@@ -82,6 +95,7 @@ class FoodController extends Controller
     public function edit($id)
     {
         $food = Food::find($id);
+
         return view('food.edit', compact('food'));
     }
 
@@ -95,31 +109,31 @@ class FoodController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name'        => 'required',
             'description' => 'required',
-            'price' => 'required|integer',
-            'category' => 'required',
-            'image' => 'mimes:png,jpeg,jpg',
+            'price'       => 'required|integer',
+            'category'    => 'required',
+            'image'       => 'mimes:png,jpeg,jpg',
         ]);
 
-        $food = Food::find($id);
-        $name = $food->image;
+        $food      = Food::find($id);
+        $imageName = $food->image;
 
         if ($request->hasFile('image')) {
             $image           = $request->file('image');
-            $name            = time().'_'.$image->getClientOriginalExtension();
+            $imageName       = time().'_'.$image->getClientOriginalExtension();
             $destinationPath = public_path('\images');
     
-            $image->move($destinationPath, $name);
+            $image->move($destinationPath, $imageName);
         }
 
-        $food->name = $request->get('name');
-        $food->description = $request->get('description');
-        $food->price = $request->get('price');
-        $food->category_id = $request->get('category');
-        $food->image = $name;
-
-        $food->save();
+        $food->update([
+            'name'        => $request->get('name'),
+            'description' => $request->get('description'),
+            'price'       => $request->get('price'),
+            'category_id' => $request->get('category'),
+            'image'       => $imageName,
+        ]);
 
         return redirect()->route('food.index')->with('message', 'Food Updated');
     }
@@ -133,19 +147,21 @@ class FoodController extends Controller
     public function destroy($id)
     {
         $food = Food::find($id);
+
         $food->delete();
+
         return redirect()->route('food.index')->with('message', 'Food Deleted');
     }
 
+    /**
+     * Display the list of Categories with their foods
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function listFood()
     {
         $categories = Category::with('food')->get();
-        return view('food.list', compact('categories'));
-    }
 
-    public function view($id)
-    {
-        $food = Food::find($id);
-        return view('food.detail', compact('food'));
+        return view('food.list', compact('categories'));
     }
 }
