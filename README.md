@@ -16,14 +16,20 @@ The inital work was completed by following along the Udemy tutorial, with some s
 
 ## Next Steps
 :black_square_button: Format Code
+
 :black_square_button: Fix View Button
+
 :black_square_button: Add some custom formatting
+
 :black_square_button: Add a substantial amount of food / categories
 
 ## Possible Improvements / Additions
 :black_square_button: Update price field to use floats
+
 :black_square_button: Create seeder files
+
 :black_square_button: Redesign site to match personal branding
+
 :black_square_button: Add rector to format code
 
 ## Notes
