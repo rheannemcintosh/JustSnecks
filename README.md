@@ -15,13 +15,15 @@ The inital work was completed by following along the Udemy tutorial, with some s
 - [#8 - List and Show Food](https://github.com/rheannemcintosh/justsnecks/pull/8) 
 
 ## Next Steps
-:black_square_button: Format Code
+:white_check_mark: Format Code
 
 :black_square_button: Fix View Button
 
 :black_square_button: Add some custom formatting
 
 :black_square_button: Add a substantial amount of food / categories
+
+:black_square_button: Update README with example images
 
 ## Possible Improvements / Additions
 :black_square_button: Update price field to use floats
@@ -32,8 +34,12 @@ The inital work was completed by following along the Udemy tutorial, with some s
 
 :black_square_button: Add rector to format code
 
+:black_square_button: Allow non registered users to view the home & show routes
+
 ## Notes
 - **Laravel Version:** Laravel 8.29.0
 - **Author:** Rheanne McIntosh
+- **Udemy Tutorial:** [Udemy Laravel Masterclass - Rangeet Karki](https://www.udemy.com/course/laravel-masterclass-build-web-apps-with-laravel-7-php)
+- **Food Images:** [Pexels](https://www.pexels.com/search/food/)
 
 If you have any questions or can suggest any improvements, please let me know!
